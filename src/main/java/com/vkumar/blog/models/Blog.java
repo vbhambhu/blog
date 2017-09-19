@@ -13,12 +13,13 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    @Size(min=3, max=50)
     @Column(unique=true)
     private String slug;
 
+    @NotNull
+    @Size(min=3, max=200)
     private String title;
+
 
     private String content;
 
