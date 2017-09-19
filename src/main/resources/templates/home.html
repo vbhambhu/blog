@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head th:fragment="head">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="ie=edge" http-equiv="x-ua-compatible" />
+    <title th:text="${metaTitle} ? ${metaTitle} : 'Redcap' "></title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="/css/frontend.css"/>
+</head>
+<body>
+
+<div class="container">
+
+
+    <div th:each="post : ${latestPosts.content}">
+        <h4><a th:href="${post.slug}" th:text="${post.title}">name</a></h4>
+        <div th:text="${post.content}">content</div>
+        <div th:text="${post.image}">image</div>
+    </div>
+
+
+    <div id="featuredPosts"></div>
+
+
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+
+    $( document ).ready(function() {
+
+
+        $.get( "/api/blog", function( data ) {
+            //console.log( data.content);
+            $.each(data.content, function(index, blog ) {
+                //console.log(blog );
+                $('#featuredPosts').append("<h3>"+blog.title+"</h3>")
+            });
+
+            getContent();
+        });
+
+
+    });
+
+
+    function  getContent() {
+
+        console.log("ddddd");
+
+    }
+
+
+
+</script>
+
+
+</body>
+</html>
