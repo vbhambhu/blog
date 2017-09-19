@@ -12,6 +12,8 @@
 
 <div class="container">
 
+    <a href="/post/add">Add new</a>
+
 
     <div th:each="post : ${latestPosts.content}">
         <h4><a th:href="${post.slug}" th:text="${post.title}">name</a></h4>

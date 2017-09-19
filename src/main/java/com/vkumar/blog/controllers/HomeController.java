@@ -18,7 +18,19 @@ public class HomeController {
     @Autowired
     BlogRepository blogRepository;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/post/add", method = RequestMethod.GET)
+    public String addPost() {
+
+        return "new";
+    }
+
+    @RequestMapping(value = "/post/add", method = RequestMethod.POST)
+    public String savePost() {
+
+        return "new";
+    }
+
+        @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showHome(Model mode){
 
         Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "id"));

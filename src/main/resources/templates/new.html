@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head th:fragment="head">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="ie=edge" http-equiv="x-ua-compatible" />
+    <title th:text="${metaTitle} ? ${metaTitle} : 'Redcap' "></title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="/css/frontend.css"/>
+</head>
+<body>
+
+<div class="container">
+
+    <a href="/">home</a>
+
+    <h3>Add</h3>
+
+    <form th:action="@{/post/add}" name="loginForm"  method="POST">
+        <div class="form-group">
+            <label for="userNameInput">Title</label>
+            <input type="text" class="form-control" id="userNameInput" name="username"   />
+        </div>
+        <div class="form-group">
+            <label for="passwordInput">Contnet</label>
+            <textarea class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Image</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+
+        <button type="submit" class="btn btn-success">Publish</button>
+    </form>
+
+
+
+
+
+</div>
+
+
+
+</body>
+</html>
