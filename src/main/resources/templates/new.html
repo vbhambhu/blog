@@ -6,6 +6,9 @@
     <meta content="ie=edge" http-equiv="x-ua-compatible" />
     <title th:text="${metaTitle} ? ${metaTitle} : 'Redcap' "></title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+
     <link rel="stylesheet" href="/css/frontend.css"/>
 </head>
 <body>
@@ -40,7 +43,26 @@
 
 </div>
 
+<!-- Include external JS libs. -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
 
+<!-- Include Editor JS files. -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.0/js/froala_editor.pkgd.min.js"></script>
+
+
+<script>
+
+
+    tinymce.init({
+        selector: '#content',
+        images_upload_url: 'postAcceptor.php',
+        images_upload_base_path: '/some/basepath',
+        images_upload_credentials: true
+    });
+
+</script>
 
 </body>
 </html>
