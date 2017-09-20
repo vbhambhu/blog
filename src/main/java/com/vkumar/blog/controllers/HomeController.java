@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,22 +25,40 @@ public class HomeController {
     @Autowired
     BlogRepository blogRepository;
 
-    @RequestMapping(value = "/post/add", method = RequestMethod.GET)
-    public String addPost(Blog blog ) {
 
+    @RequestMapping(value = "/post/edit/{slug}", method = RequestMethod.GET)
+    public String editPost(@PathVariable("slug") String slug, Model model) {
+
+        Blog blog = blogRepository.findBySlug(slug);
+        model.addAttribute("blog", blog);
+        return "post/edit";
+    }
+
+
+
+
+    @RequestMapping(value = "/post/add", method = RequestMethod.GET)
+    public String addPost(Blog blog, Model model) {
+
+        String[] jsFiles = new String[] {"summernote.min.js"};
+        model.addAttribute("jsFiles", jsFiles);
         return "new";
     }
 
     @RequestMapping(value = "/post/add", method = RequestMethod.POST)
     public String savePost(@Valid Blog blog , BindingResult bindingResult) {
 
+
+
         if (bindingResult.hasErrors()) {
             return "new";
         }
 
-        //Create slug
+
+
         blog.setSlug(toSlug(blog.getTitle()));
         blogRepository.save(blog);
+
 
         return "redirect:/";
 
@@ -55,8 +74,14 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String showBlog(Model mode){
+    @RequestMapping(value = "/{slug}", method = RequestMethod.GET)
+    public String showBlog(@PathVariable(name = "slug", required=false) String slug, Model model){
+
+
+        Blog blog = blogRepository.findBySlug(slug);
+
+        model.addAttribute("post", blog);
+
         return "post/view";
     }
 

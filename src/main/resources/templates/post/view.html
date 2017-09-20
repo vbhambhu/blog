@@ -1,1 +1,32 @@
-View your blog here.
+
+<!DOCTYPE html>
+<html>
+<head th:fragment="head">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="ie=edge" http-equiv="x-ua-compatible" />
+    <title th:text="${metaTitle} ? ${metaTitle} : 'Redcap' "></title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" />
+    <link rel="stylesheet" href="/css/frontend.css"/>
+</head>
+<body>
+
+<div class="container">
+
+    <a th:href="@{/post/edit/} + ${post.slug}">edit</a>
+
+
+<h1 th:text="${post.title}"></h1>
+
+
+
+
+    <div  th:remove="tag" th:utext="${post.content}">content</div>
+
+
+
+</div>
+
+</body>
+</html>

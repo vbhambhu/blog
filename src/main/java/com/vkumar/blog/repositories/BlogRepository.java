@@ -12,6 +12,7 @@ public interface BlogRepository extends PagingAndSortingRepository<Blog, Long> {
 
     Page<Blog> findAll(Pageable pageable);
 
+    Blog findBySlug(String slug);
 
 
 
