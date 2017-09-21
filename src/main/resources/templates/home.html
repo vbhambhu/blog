@@ -12,20 +12,25 @@
 
 <div class="container">
 
-
+    <a href="/post/add">Add new</a>
 
     <div class="row">
         <div class="col-md-8">
-            <img  class="lazyload" data:src="@{latestPosts.content[0].image}" class="img-fluid"/>
+
+            <img data-src="https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg" class="lazy img-fluid"/>
+            <h4><a th:href="${latestPosts.content[0].slug}" th:text="${latestPosts.content[0].title}">name</a></h4>
         </div>
         <div class="col-md-4">
 
             <div class="row">
                 <div class="col-md-12">
-                    <img  class="lazyload" data:src="@{latestPosts.content[0].image}" class="img-fluid"/>
+                    <img data-src="https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg" class="lazy img-fluid"/>
+                    <img data-echo="${latestPosts.content[0].image}" class="img-fluid"/>
+                    <h4><a th:href="${latestPosts.content[1].slug}" th:text="${latestPosts.content[1].title}">name</a></h4>
                 </div>
                 <div class="col-md-12">
-                    <img  class="lazyload" data:src="@{${latestPosts.content[0].image}}" class="img-fluid"/>
+                    <img data-src="https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg" class="lazy img-fluid"/>
+                    <h4><a th:href="${latestPosts.content[2].slug}" th:text="${latestPosts.content[2].title}">name</a></h4>
                 </div>
             </div>
 
@@ -37,6 +42,7 @@
     <div class="row">
         <div class="col-md-8">
             <h3>Latest posts</h3>
+            <div id="featuredPosts"></div>
 
 
         </div>
@@ -52,32 +58,35 @@
 
 
 
-    <a href="/post/add">Add new</a>
 
 
-    <div th:each="post : ${latestPosts.content}">
 
-        <!--<img  th:src="${post.image}" class="img-fluid"/>-->
-        <h4><a th:href="${post.slug}" th:text="${post.title}">name</a></h4>
-        <div th:text="${post.content}">content</div>
-        <div th:text="${post.image}">image</div>
-    </div>
-
-
-    <div id="featuredPosts"></div>
 
 
 
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/lazyload.min.js"></script>
-
+<script src="/js/echo.min.js"></script>
+<script src="/js/jquery.lazy.min.js"></script>
 <script>
+
+
+//    echo.init({
+//        offset: 100,
+//        throttle: 250,
+//        unload: false,
+//        callback: function (element, op) {
+//            console.log(element, 'has been', op + 'ed')
+//        }
+//    });
+
+
 
     $( document ).ready(function() {
 
-        lazyload();
+
+        $('.lazy').Lazy();
 
 
         $.get( "/api/blog", function( data ) {
