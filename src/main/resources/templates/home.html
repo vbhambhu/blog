@@ -10,121 +10,75 @@
 </head>
 <body>
 
-<div class="container">
 
-    <a href="/post/add">Add new</a>
-
-
-    <div th:each="post : ${latestPosts}">
-        <a th:href="${post.slug}"><h2 th:text="${post.title}">title</h2></a>
-        <p><span th:text="${post.createdAt}">datetime</span> by vkumar with 0 Comments JavaSpring Boot | Edit</p>
-        <p  th:remove="tag" th:utext="${post.content}">content</p>
-
-
-        <div class="read-more">
-            <a th:href="${post.slug}" class="btn btn-secondary">Read more</a>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="post.html">Sample Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/post/add">Add new</a>
+                </li>
+            </ul>
         </div>
     </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Clean Blog</h1>
+                    <span class="subheading">A Blog Theme by Start Bootstrap</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+
+            <div class="post-preview" th:each="post : ${latestPosts}">
+
+                <a th:href="${post.slug}"><h2 class="post-title" th:text="${post.title}">title</h2></a>
+                <p class="post-meta">Posted by
+                    <a href="#">Start Bootstrap</a>
+                    on September 24, 2017</p>
+
+                <p  th:remove="tag" th:utext="${post.content}">content</p>
+                <hr>
+            </div>
+
+            <!-- Pager -->
+            <div class="clearfix">
+                <a class="btn btn-secondary float-right" href="#">Older Posts &rarr;</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <hr>
 
-    <!--<div class="row">-->
-        <!--<div class="col-md-8">-->
-            <!--<img data-src="https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg" class="lazy img-fluid"/>-->
-            <!--<h4><a th:href="${latestPosts.content[0].slug}" th:text="${latestPosts.content[0].title}">name</a></h4>-->
-        <!--</div>-->
-        <!--<div class="col-md-4">-->
-
-            <!--<div class="row">-->
-                <!--<div class="col-md-12">-->
-                    <!--<img data-src="https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg" class="lazy img-fluid"/>-->
-                    <!--<img data-echo="${latestPosts.content[0].image}" class="img-fluid"/>-->
-                    <!--<h4><a th:href="${latestPosts.content[1].slug}" th:text="${latestPosts.content[1].title}">name</a></h4>-->
-                <!--</div>-->
-                <!--<div class="col-md-12">-->
-                    <!--<img data-src="https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg" class="lazy img-fluid"/>-->
-                    <!--<h4><a th:href="${latestPosts.content[2].slug}" th:text="${latestPosts.content[2].title}">name</a></h4>-->
-                <!--</div>-->
-            <!--</div>-->
-
-        <!--</div>-->
-    <!--</div>-->
-
-
-
-    <div class="row">
-        <div class="col-md-8">
-            <h3>Latest posts</h3>
-            <div id="featuredPosts"></div>
-
-
-        </div>
-        <div class="col-md-4">
-            sss
-
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/echo.min.js"></script>
-<script src="/js/jquery.lazy.min.js"></script>
-<script>
-
-
-//    echo.init({
-//        offset: 100,
-//        throttle: 250,
-//        unload: false,
-//        callback: function (element, op) {
-//            console.log(element, 'has been', op + 'ed')
-//        }
-//    });
-
-
-
-    $( document ).ready(function() {
-
-
-        $('.lazy').Lazy();
-
-
-        $.get( "/api/blog", function( data ) {
-            //console.log( data.content);
-            $.each(data.content, function(index, blog ) {
-                //console.log(blog );
-                $('#featuredPosts').append("<h3>"+blog.title+"</h3>")
-            });
-
-            getContent();
-        });
-
-
-    });
-
-
-    function  getContent() {
-
-        console.log("ddddd");
-
-    }
-
-
-
-</script>
 
 
 </body>

@@ -14,6 +14,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
     @Column(unique=true)
     private String slug;
 
