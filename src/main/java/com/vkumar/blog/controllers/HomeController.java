@@ -1,7 +1,7 @@
 package com.vkumar.blog.controllers;
 
-import com.vkumar.blog.models.Blog;
-import com.vkumar.blog.repositories.BlogRepository;
+import com.vkumar.blog.models.Post;
+import com.vkumar.blog.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.text.Normalizer;
+import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
@@ -23,13 +24,24 @@ import java.util.regex.Pattern;
 public class HomeController {
 
     @Autowired
-    BlogRepository blogRepository;
+    PostRepository postRepository;
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String showHome(Model mode){
+
+        Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
+        Pageable pageable = new PageRequest(0, 10, sort);
+        Page<Post> blogs = postRepository.findAll(pageable);
+        mode.addAttribute("latestPosts", blogs.getContent());
+        return "home";
+    }
+
 
 
     @RequestMapping(value = "/post/edit/{slug}", method = RequestMethod.GET)
     public String editPost(@PathVariable("slug") String slug, Model model) {
 
-        Blog blog = blogRepository.findBySlug(slug);
+        Post blog = postRepository.findBySlug(slug);
         model.addAttribute("blog", blog);
         return "post/edit";
     }
@@ -38,15 +50,12 @@ public class HomeController {
 
 
     @RequestMapping(value = "/post/add", method = RequestMethod.GET)
-    public String addPost(Blog blog, Model model) {
-
-        String[] jsFiles = new String[] {"summernote.min.js"};
-        model.addAttribute("jsFiles", jsFiles);
+    public String addPost(Post post, Model model) {
         return "new";
     }
 
     @RequestMapping(value = "/post/add", method = RequestMethod.POST)
-    public String savePost(@Valid Blog blog , BindingResult bindingResult) {
+    public String savePost(@Valid Post blog , BindingResult bindingResult) {
 
 
 
@@ -57,28 +66,28 @@ public class HomeController {
 
 
         blog.setSlug(toSlug(blog.getTitle()));
-        blogRepository.save(blog);
+        postRepository.save(blog);
 
 
         return "redirect:/";
 
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String showHome(Model mode){
-
-        Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "id"));
-        Pageable pageable = new PageRequest(0, 3, sort);
-        Page<Blog> blogs = blogRepository.findAll(pageable);
-        mode.addAttribute("latestPosts", blogs);
-        return "home";
-    }
+//    @RequestMapping(value = "/sss", method = RequestMethod.GET)
+//    public String showHomes(Model mode){
+//
+//        Sort sort = new Sort(new Sort.Order(Sort.Direction.ASC, "id"));
+//        Pageable pageable = new PageRequest(0, 3, sort);
+//        Page<Blog> blogs = blogRepository.findAll(pageable);
+//        mode.addAttribute("latestPosts", blogs);
+//        return "home";
+//    }
 
     @RequestMapping(value = "/{slug}", method = RequestMethod.GET)
     public String showBlog(@PathVariable(name = "slug", required=false) String slug, Model model){
 
 
-        Blog blog = blogRepository.findBySlug(slug);
+        Post blog = postRepository.findBySlug(slug);
 
         model.addAttribute("post", blog);
 

@@ -4,10 +4,11 @@ package com.vkumar.blog.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name = "posts")
-public class Blog {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +24,9 @@ public class Blog {
 
     private String content;
 
-    private String image;
+
+    private Date createdAt = new Date();
+    private Date updatedAt = new Date();
 
 
     public Long getId() {
@@ -58,11 +61,19 @@ public class Blog {
         this.content = content;
     }
 
-    public String getImage() {
-        return image;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

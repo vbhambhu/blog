@@ -17,7 +17,7 @@
     <a href="/">home</a>
 
     <h3>Add</h3>
-        <form action="#" th:action="@{/post/add}" th:object="${blog}" method="POST">
+        <form id="post" action="#" th:action="@{/post/add}" th:object="${post}" method="POST">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" id="title" th:field="*{title}" th:class="form-control" />
@@ -25,12 +25,7 @@
         </div>
         <div class="form-group">
             <div id="content1"></div>
-            <textarea id="content"  th:field="*{content}" hidden></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="image">Image</label>
-            <input type="text" id="image" th:field="*{image}" th:class="form-control" />
+            <textarea id="content"  th:field="*{content}"></textarea>
         </div>
 
             <button type="submit" class="btn btn-success" >Publish</button>
@@ -61,8 +56,12 @@
         height: 300
     });
 
+    $('#post').submit(function() {
+        $('#content').text($('#content1').wmwysiwyg('getContents'));
+    });
 
 
+/*
     //setup before functions
     var typingTimer;                //timer identifier
     var doneTypingInterval = 1000;  //time in ms, 5 second for example
@@ -84,6 +83,8 @@
         //do something
         $('#content').text($('#content1').wmwysiwyg('getContents'));
     }
+
+    */
 </script>
 
 

@@ -14,28 +14,41 @@
 
     <a href="/post/add">Add new</a>
 
-    <div class="row">
-        <div class="col-md-8">
 
-            <img data-src="https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg" class="lazy img-fluid"/>
-            <h4><a th:href="${latestPosts.content[0].slug}" th:text="${latestPosts.content[0].title}">name</a></h4>
-        </div>
-        <div class="col-md-4">
+    <div th:each="post : ${latestPosts}">
+        <a th:href="${post.slug}"><h2 th:text="${post.title}">title</h2></a>
+        <p><span th:text="${post.createdAt}">datetime</span> by vkumar with 0 Comments JavaSpring Boot | Edit</p>
+        <p  th:remove="tag" th:utext="${post.content}">content</p>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <img data-src="https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg" class="lazy img-fluid"/>
-                    <img data-echo="${latestPosts.content[0].image}" class="img-fluid"/>
-                    <h4><a th:href="${latestPosts.content[1].slug}" th:text="${latestPosts.content[1].title}">name</a></h4>
-                </div>
-                <div class="col-md-12">
-                    <img data-src="https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg" class="lazy img-fluid"/>
-                    <h4><a th:href="${latestPosts.content[2].slug}" th:text="${latestPosts.content[2].title}">name</a></h4>
-                </div>
-            </div>
 
+        <div class="read-more">
+            <a th:href="${post.slug}" class="btn btn-secondary">Read more</a>
         </div>
     </div>
+
+<hr>
+
+    <!--<div class="row">-->
+        <!--<div class="col-md-8">-->
+            <!--<img data-src="https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg" class="lazy img-fluid"/>-->
+            <!--<h4><a th:href="${latestPosts.content[0].slug}" th:text="${latestPosts.content[0].title}">name</a></h4>-->
+        <!--</div>-->
+        <!--<div class="col-md-4">-->
+
+            <!--<div class="row">-->
+                <!--<div class="col-md-12">-->
+                    <!--<img data-src="https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg" class="lazy img-fluid"/>-->
+                    <!--<img data-echo="${latestPosts.content[0].image}" class="img-fluid"/>-->
+                    <!--<h4><a th:href="${latestPosts.content[1].slug}" th:text="${latestPosts.content[1].title}">name</a></h4>-->
+                <!--</div>-->
+                <!--<div class="col-md-12">-->
+                    <!--<img data-src="https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg" class="lazy img-fluid"/>-->
+                    <!--<h4><a th:href="${latestPosts.content[2].slug}" th:text="${latestPosts.content[2].title}">name</a></h4>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</div>-->
+    <!--</div>-->
 
 
 
