@@ -27,12 +27,11 @@ public class HomeController {
     PostRepository postRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String showHome(Model mode){
+    public String showHome(Model model){
 
-        Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
-        Pageable pageable = new PageRequest(0, 10, sort);
-        Page<Post> blogs = postRepository.findAll(pageable);
-        mode.addAttribute("latestPosts", blogs.getContent());
+        Post post = postRepository.findBySlug("home");
+        model.addAttribute("post", post);
+
         return "home";
     }
 
